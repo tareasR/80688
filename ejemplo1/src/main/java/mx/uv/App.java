@@ -1,7 +1,7 @@
 package mx.uv;
 
 import static spark.Spark.*;
-
+import com.google.gson.*;
 /**
  * Hello world!
  *
@@ -75,6 +75,28 @@ public class App {
             else
                 respuesta = "Usuario equivocado ";
             return respuesta + l + " <a href='http://127.0.0.1:5500/envio_formulario.html'>volver</a>";
+        });
+
+
+        post("/saludarJson", (req, res) -> {
+            String l = req.queryParams("nombre");
+            String p = req.queryParams("password");
+            String respuesta;
+            System.out.println(l + " " + p);
+
+            // if (l.equals("root") && p.equals("123456"))
+            //     respuesta = "Bienvenido usuario ";
+            // else
+            //     respuesta = "Usuario equivocado ";
+            // return respuesta + l + " <a href='http://127.0.0.1:5500/envio_formulario.html'>volver</a>";
+            // JsonParser parser = new JsonParser();
+            // JsonElement arbol = parser.parse(json);
+
+            JsonObject objetoJson = new JsonObject();
+            objetoJson.addProperty("nombre", "carlos");
+            objetoJson.addProperty("genero", "masculino");
+
+            return objetoJson;
         });
     }
 }
