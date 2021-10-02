@@ -60,11 +60,15 @@ btnNoSubmitPostJson.addEventListener('click', function () {
     // console.log(params.get('nombre'));
     // console.log(params.get('password'));
     // invocación de la librería AXIOS
-    axios.post('http://localhost:4567/saludarJson', params)
+    //var param2 = {firstName:"John", lastName:"Doe", age:50, eyeColor:"blue"};
+    axios.post('http://localhost:4567/saludarJson', {
+        firstName : email,
+        password : pass
+    })
         .then(function (response) {
             console.log(response);
-            console.log("verdad: " + response.data);
-            alert(response.data)
+            console.log("verdad: " + response.data.usuario);
+            alert(response.data.usuario)
         })
         .catch(function (error) {
             console.log("error: " + error);

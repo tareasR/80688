@@ -79,22 +79,26 @@ public class App {
 
 
         post("/saludarJson", (req, res) -> {
-            String l = req.queryParams("nombre");
-            String p = req.queryParams("password");
-            String respuesta;
-            System.out.println(l + " " + p);
+            // String l = req.queryParams("firstName");
+            // String p = req.queryParams("lastName");
+            // String respuesta;
+            System.out.println( req.body() );
 
             // if (l.equals("root") && p.equals("123456"))
             //     respuesta = "Bienvenido usuario ";
             // else
             //     respuesta = "Usuario equivocado ";
             // return respuesta + l + " <a href='http://127.0.0.1:5500/envio_formulario.html'>volver</a>";
-            // JsonParser parser = new JsonParser();
-            // JsonElement arbol = parser.parse(json);
+            JsonParser parser = new JsonParser();
+            JsonElement arbol = parser.parse(req.body());
+            JsonObject peticion =  arbol.getAsJsonObject();
+            Object usuario = peticion.get("firstName") ;
+            System.out.println( usuario + " " + peticion.get("password"));
 
             JsonObject objetoJson = new JsonObject();
-            objetoJson.addProperty("nombre", "carlos");
-            objetoJson.addProperty("genero", "masculino");
+            objetoJson.addProperty("usuario", usuario.toString());
+            objetoJson.addProperty("access",  "granted");
+            objetoJson.addProperty("time",  11111);
 
             return objetoJson;
         });
