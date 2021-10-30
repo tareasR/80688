@@ -21,14 +21,41 @@ public class App {
 
     public static void main(String[] args) {
         System.out.println("Hello World!");
+        port(getHerokuAssignedPort());
 
         staticFiles.location("/");
+
+        // Enables CORS on requests. This method is an initialization method and should
+        // be called once.
+
+        options("/*", (request, response) -> {
+
+            String accessControlRequestHeaders = request.headers("Access-Control-Request-Headers");
+            if (accessControlRequestHeaders != null) {
+                response.header("Access-Control-Allow-Headers", accessControlRequestHeaders);
+            }
+
+            String accessControlRequestMethod = request.headers("Access-Control-Request-Method");
+            if (accessControlRequestMethod != null) {
+                response.header("Access-Control-Allow-Methods", accessControlRequestMethod);
+            }
+
+            return "OK";
+        });
+
+        before((req, res) -> res.header("Access-Control-Allow-Origin", "*"));
+        
 
         /**
          * Este método ya no es alcanzado, debido a que se ejecuta primero el location
          * raíz "/"
          */
-        get("/", (req, res) -> "respuesta");
+        // get("/", (req, res) -> "respuesta");
+        get("/", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            return new VelocityTemplateEngine().render(new ModelAndView(model, "index.html"));
+        });
+
         get("/hola", (req, res) -> "hola mundo");
         get("/pagina", (req, res) -> {
             res.redirect("estatica.html");
@@ -69,5 +96,13 @@ public class App {
             return new VelocityTemplateEngine().render(new ModelAndView(model, "templates/velocity.vm"));
         });
 
+    }
+
+    static int getHerokuAssignedPort() {
+        ProcessBuilder processBuilder = new ProcessBuilder();
+        if (processBuilder.environment().get("PORT") != null) {
+            return Integer.parseInt(processBuilder.environment().get("PORT"));
+        }
+        return 4567; //return default port if heroku-port isn't set (i.e. on localhost)
     }
 }
