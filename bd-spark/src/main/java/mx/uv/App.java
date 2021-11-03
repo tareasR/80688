@@ -39,7 +39,10 @@ public class App {
 
         get("/usuarios", (req, res) -> {
             before((rq, rs) -> rs.type("application/json"));
-            return gson.toJson(usuarios.values());
+            DAO dao = new DAO();
+            // return gson.toJson(usuarios.values());
+            //System.out.println(dao.listaUsuario().get(0).getEmail());
+            return gson.toJson(dao.listaUsuario());
         });
 
         post("/usuario", (req, res) -> {
