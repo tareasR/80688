@@ -11,7 +11,7 @@ navigator.mediaDevices.getUserMedia({
     video: true
 }).then((stream) => {
     console.log(stream)
-    mediaRecorder = new MediaRecorder(stream, {mimeType: 'video/webm; codecs=vp8'});
+    mediaRecorder = new MediaRecorder(stream, { mimeType: 'video/webm; codecs=vp8' });
 
     // alert('gracias por permitirnos verte')
     var video = document.querySelector('video');
@@ -28,25 +28,32 @@ navigator.mediaDevices.getUserMedia({
         var clipContainer = document.createElement('article');
         var clipLabel = document.createElement('p');
         var audio = document.createElement('video');
+        audio.width = "200"
         var deleteButton = document.createElement('button');
-  
+        var a = document.createElement('a');
+        var link = document.createTextNode("descarga");
+        a.appendChild(link);
+
         clipContainer.classList.add('clip');
         audio.setAttribute('controls', '');
         deleteButton.innerHTML = "Delete";
         clipLabel.innerHTML = clipName;
-  
+
         soundClips = document.getElementById("xxx")
         clipContainer.appendChild(audio);
         clipContainer.appendChild(clipLabel);
         clipContainer.appendChild(deleteButton);
+        clipContainer.appendChild(a);
         soundClips.appendChild(clipContainer);
-  
+
         audio.controls = true;
-        var blob = new Blob(chunks, {type: 'video/webm; codecs=vp8'});
+        var blob = new Blob(chunks, { type: 'video/webm; codecs=vp8' });
         // chunks = [];
         var audioURL = URL.createObjectURL(blob);
         audio.src = audioURL;
-        
+        a.href = audioURL
+        a.download = 'video.mp4'
+
         // esto debí colocarlo en la función PARAR
         // mediaRecorder.ondataavailable = function(e) {
         //     console.log(e)
@@ -72,10 +79,10 @@ function PARAR(params) {
     console.log("recorder stopped");
 
     // este método debe ir al parar para pushear la captura en el array
-    mediaRecorder.ondataavailable = function(e) {
+    mediaRecorder.ondataavailable = function (e) {
         console.log(e)
         chunks.push(e.data);
-      }
+    }
     // record.style.background = "";
     // record.style.color = "";
 }
