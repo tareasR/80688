@@ -51,6 +51,7 @@ navigator.mediaDevices.getUserMedia({
         // chunks = [];
         var audioURL = URL.createObjectURL(blob);
         audio.src = audioURL;
+        // asociamos el link de descarga al objeto creado
         a.href = audioURL
         a.download = 'video.mp4'
 
@@ -82,7 +83,18 @@ function PARAR(params) {
     mediaRecorder.ondataavailable = function (e) {
         console.log(e)
         chunks.push(e.data);
+        guardar(e.data)
     }
     // record.style.background = "";
     // record.style.color = "";
+}
+
+function guardar(stream) {
+    var formData = new FormData();
+    formData.append("videoGrabado", stream)
+    axios.post("http://localhost:4567/", formData, {
+        headers: {
+            "Content-Type" : "multipart/form-data"
+        }
+    })
 }
