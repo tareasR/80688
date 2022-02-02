@@ -1,3 +1,0 @@
-dir 
-ls
-echo "hola"
