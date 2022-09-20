@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="practica02.css">
 
     <style>
-/*        .ui:hover{
+        /*        .ui:hover{
             background-color: green;
             font-weight: bold;
         }*/
@@ -38,33 +38,44 @@
             font-weight: bold;
             color: black !important;
         }
-        .ui{
+
+        .ui {
             color: white;
             padding: 10px;
         }
-        #borrar{
+
+        #borrar {
             background-color: red;
         }
-	/*enfatiza que se haga el cambio aunque haya conflicto*/
-        .ui:hover{
+
+        /*enfatiza que se haga el cambio aunque haya conflicto*/
+        .ui:hover {
             background-color: gray !important;
         }
-        .ui:active{
+
+        .ui:active {
             background-color: rgb(38, 191, 225) !important;
         }
-        #cambiar{
+
+        #cambiar {
             background-color: green;
         }
-        #guardar{
+
+        #guardar {
             background-color: blue;
+        }
+
+        a[target="_blank"] {
+            background-color: yellow;
         }
     </style>
 </head>
 
 <body>
     <div><input type="button" value="borrar datos" id="borrar" class="ui">
-        <input type="button" value="cambiar datos" id="cambiar"
-            class="ui"><input type="button" value="guardar datos" id="guardar" class="ui"></div>
+        <input type="button" value="cambiar datos" id="cambiar" class="ui"><input type="button" value="guardar datos"
+            id="guardar" class="ui">
+    </div>
     <h1>título de nivel 1</h1>
     <p><span id="p1" class="peso">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt aliquid quis, dolorem
             accusantium ipsum
@@ -100,6 +111,10 @@
             similique fugiat reprehenderit quae accusamus quia explicabo! Quaerat, odio natus sapiente beatae nam nulla
             esse!</span>
     </div>
+ 
+    <a href="http://google.com" target="_blank">clickame</a>
+    <a href="http://yahoo.com" target="">clickame2</a>
+    <!-- a[x=1111 y=9999 id=miYd]{el texto} -->
 </body>
 
 </html>

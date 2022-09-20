@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .padre{
+            background-color: aqua;
+            /* display: flex;
+            flex-wrap: wrap; */
+            border: 1px solid black;
+            margin: 5px;
+        }
+        .hijo{
+            margin: 10px;
+            background-color: yellow;
+            /* margin: auto; */
+            width: 200px;
+        }
+        .hijo2{
+            background-color: bisque;
+            /* margin: auto; */
+            width: 200px;
+        }
+    </style>
+</head>
+<body>
+    <div class="padre">01</div>
+    <div class="padre">02</div>
+    <div class="padre">03</div>
+    <div class="padre">04</div>
+    <div class="padre">05</div>
+
+    <div class="padre">
+        <!-- div.hijo2{h$$}*5 -->
+        <div class="hijo2">h01</div>
+        <div class="hijo2">h02</div>
+        <div class="hijo2">h03</div>
+        <div class="hijo2">h04</div>
+        <div class="hijo2">h05</div>
+    </div>
+    <div class="padre">
+        <div class="hijo">h02</div>
+        <div class="hijo">h02</div>
+        <div class="hijo">h02</div>
+        <div class="hijo">h02</div>
+    </div>
+    <div class="padre">
+        <div class="hijo">h03</div>
+    </div>
+    <div class="padre">
+        <div class="hijo">h04</div>
+    </div>
+
+    <p class="padre">
+        <div class="hijo2">ph01</div>
+        <div class="hijo2">ph02</div>
+        <div class="hijo2">ph03</div>
+        <div class="hijo2">ph04</div>
+        <div class="hijo2">ph05</div>
+    </p>
+</body>
+</html>
