@@ -2,7 +2,9 @@ package mx.uv.c80688;
 
 import static spark.Spark.*;
 
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
 /**
  * Hello world!
@@ -31,9 +33,19 @@ public class App {
         get("/eduardo", (req, res) -> "Hello eduardo");
         get("/", (req, res) -> "<h1>Hola Sistemas Web</h1><img src='https://www.uv.mx/v2/images/logouv.jpg'>");
         post("/", (req, res) -> {
-            System.out.println("login: " + req.queryParams("login"));
-            System.out.println("contraseña: " + req.queryParams("password"));
-            String usuario = req.queryParams("login");
+            // System.out.println("login: " + req.queryParams("login"));
+            // System.out.println("contraseña: " + req.queryParams("password"));
+            System.out.println(req.body());
+
+            // procesar petición json
+            JsonParser parser = new JsonParser();
+            JsonElement arbol = parser.parse(req.body());
+            JsonObject peticionDelCliente = arbol.getAsJsonObject();
+            System.out.println(peticionDelCliente.get("login"));
+            System.out.println(peticionDelCliente.get("password"));
+
+            // String usuario = req.queryParams("login");
+            String usuario = peticionDelCliente.get("login").getAsString();
 
             JsonObject respuesta = new JsonObject();
             respuesta.addProperty("msj", "bienvenido");
