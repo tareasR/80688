@@ -40,7 +40,7 @@ public class App
                 (request, response) -> "<h1>Adios mundo!</h1>"
         );
         get("/alumno", 
-                (request, response) -> "{'alumno' : 'john','matricula' : 's0001','carrera' : 'tc'}"
+                (request, response) -> "{\"alumno\" : \"john\",\"matricula\" : \"s0001\",\"carrera\" : \"tc\"}"
         );
 
         post("/alumno", 
@@ -53,14 +53,39 @@ public class App
                 }
         );
 
-        get("/tipo-usuario", (request, response) ->{
+        get("/tipousuario", (request, response) ->{
                 JsonObject respuesta = new JsonObject();
+                System.out.println("Este es el tipo de contenido: "+request.contentType());
                 respuesta.addProperty("tipousuario", "profesor");
                 respuesta.addProperty("nombre", request.queryParams("nombre"));
                 respuesta.addProperty("paterno", request.queryParams("paterno"));
                 respuesta.addProperty("materno", request.queryParams("materno"));
-
+                //response.status(404);
+                response.header("respuesta", "GET");
+                // response.type("application/json");
                 return respuesta;
+        });
+
+        post("/tipousuario", (request, response) ->{
+                JsonObject respuesta = new JsonObject();
+                System.out.println("Este es el tipo de contenido: "+request.contentType());
+                respuesta.addProperty("tipousuario", "profesor");
+                respuesta.addProperty("nombre", request.queryParams("nombre"));
+                respuesta.addProperty("paterno", request.queryParams("paterno"));
+                respuesta.addProperty("materno", request.queryParams("materno"));
+                //response.status(404);
+                response.header("respuesta", "POST");
+                // response.type("application/json");
+                return respuesta;
+        });
+
+        post("/json", (request, response)->{
+                String peticion = request.body();
+                System.out.println(peticion);
+
+                JsonParser parser = new JsonParser();
+                JsonElement arbol = parser.parse(peticion);
+                return arbol.getAsJsonObject().get("nombre"); //.getAsString()¡;
         });
     }
 }

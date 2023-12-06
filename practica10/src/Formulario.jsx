@@ -1,6 +1,7 @@
 import { Button, Box, TextField } from "@mui/material"
 import axios from "axios"
 import { useState } from "react"
+import Popup from "./Popup.jsx"
 
 function Formulario(props) {
     const [Cargando, setCargando] = useState (false)
@@ -8,7 +9,9 @@ function Formulario(props) {
 
     const hacerPeticion = async () => {
         try {
-            const response = await axios.get('http://localhost:4567/tipo-usuario')
+            //const response = await axios.post('http://localhost:4567/json',  datosFormulario )
+            // const response = await axios.get('http://localhost:4567/tipousuario',  {params:datosFormulario} )
+            const response = await axios.post('http://localhost:4567/tipousuario',  {params:datosFormulario} )
             console.log("hacerPeticion", response)
             return response.data
         } catch (error) {
@@ -17,7 +20,7 @@ function Formulario(props) {
     }
 
     const cambiosFormulario = (evento) => {
-        //console.log(evento.target)
+        //console.ºlog(evento.target)
         const {name, value} = evento.target
         setDatosFormulario( { ...datosFormulario, [name] : value })
     }
@@ -53,6 +56,9 @@ function Formulario(props) {
                 </Box>
                 <Box m={5}>
                     <Button variant="contained" type="submit" color="primary" fullWidth disabled={Cargando}>Iniciar Sesión</Button>
+                </Box>
+                <Box m={5}>
+                    <Popup id={datosFormulario}/>
                 </Box>
             </form>
         </>
