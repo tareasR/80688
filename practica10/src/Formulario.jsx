@@ -11,13 +11,18 @@ function Formulario(props) {
         try {
             //const response = await axios.post('http://localhost:4567/json',  datosFormulario )
             // const response = await axios.get('http://localhost:4567/tipousuario',  {params:datosFormulario} )
-            const response = await axios.post('http://localhost:4567/tipousuario',  {params:datosFormulario} )
+            const response = await axios.post('http://localhost:4567/usuarios',  datosFormulario )
             console.log("hacerPeticion", response)
+            setId(response.data.id)
+            setMostrarPopup(true)
             return response.data
         } catch (error) {
             throw error
         }
     }
+
+    const [id, setId] = useState('') 
+    const [mostrarPopup, setMostrarPopup] = useState (false)
 
     const cambiosFormulario = (evento) => {
         //console.ºlog(evento.target)
@@ -58,7 +63,7 @@ function Formulario(props) {
                     <Button variant="contained" type="submit" color="primary" fullWidth disabled={Cargando}>Iniciar Sesión</Button>
                 </Box>
                 <Box m={5}>
-                    <Popup id={datosFormulario}/>
+                    {mostrarPopup && <Popup id={id}/>}
                 </Box>
             </form>
         </>

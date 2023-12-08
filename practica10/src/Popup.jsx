@@ -6,7 +6,7 @@ import  DialogActions  from "@mui/material/DialogActions"
 import { useState } from "react"
 
 function Popup ({id}) {
-    const [open, setOpen] = useState(false)
+    const [open, setOpen] = useState(true)
     const eventoAbrir = () => {setOpen(true)}
     const eventoCerrar = () => {setOpen(false)}
 
@@ -17,7 +17,7 @@ function Popup ({id}) {
                 <Dialog open={open} onClose={eventoCerrar}>
                     <DialogTitle>Ejemplo Diálogo</DialogTitle>
                     <DialogContent>
-                        Información a mostrar {id.nombre}
+                        Información a mostrar {id}
                     </DialogContent>
                     <DialogActions>
                          <Button onClick={eventoCerrar}>Cerrar</Button>
