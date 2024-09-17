@@ -9,36 +9,31 @@
             border-radius: 50px;
         }
     </style>
-    <script>
-        // esto es un comentario
-        let variable = "comentario"
-        let numero = 50
-        console.log(variable)
-        console.log(numero)
-    </script>
 </head>
 <body>
     <!-- esto es un comentario -->
     <h1>Random Picture</h1>
-    <ul>
-        <li><a href="#john" id="m1">John</a></li>
-        <li><a href="#jane" id="m2">Jane</a></li>
-    </ul>
-
-    <figure>
+    <div id="app"></div>
+    <!-- <figure>
         <img src="https://picsum.photos/id/1/200/200" alt="">
         <figcaption id="a1">1</figcaption>
-        <img src="https://picsum.photos/id/2/200/200" alt="">
-        <figcaption id="a2">2</figcaption>
-    </figure>
-
+    </figure> -->
     <script>
-        const elemento1 = document.getElementById("a1").textContent
-        const elemento2 = document.getElementById("a2").textContent
-        console.log(elemento1)
-        console.log(elemento2)
-        document.getElementById("m1").innerHTML = elemento1
-        document.getElementById("m2").innerHTML = elemento2
+        const app = document.getElementById("app")
+        const url = "https://picsum.photos/id/"
+        const size = "/200/200"
+        const picture = parametro => {
+            const src = url+parametro+size 
+            return `
+            <figure>
+                <img src="https://picsum.photos/id/${parametro}/200/200" alt="">
+                <figcaption id="a1">${parametro}</figcaption>
+            </figure>
+            `
+        }
+        console.log(picture())
+
+        app.innerHTML = picture(1) + picture(2) + picture(3) + picture(4) 
     </script>
 </body>
 </html>
