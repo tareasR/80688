@@ -15,7 +15,8 @@ bEnviar.addEventListener("click", () => {
     // imprime el objeto JSON convertido a una cadena 
     console.log(JSON.stringify(Object.fromEntries(params)))
     // llamada al backend
-    axios.post("https://backend-production-3b22.up.railway.app/colores", Object.fromEntries(params))
+    // axios.post("https://backend-production-3b22.up.railway.app/colores", Object.fromEntries(params))
+    axios.post("http://localhost/colores", Object.fromEntries(params))
     .then(
         respuesta => {
             console.log(respuesta)

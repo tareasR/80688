@@ -1,6 +1,7 @@
 const btnColores = document.getElementById("btnColores")
 btnColores.addEventListener("click",()=>{
-    axios.get('https://backend-production-3b22.up.railway.app/colores')
+    // axios.get('https://backend-production-3b22.up.railway.app/colores')
+    axios.get('http://localhost/colores')
     .then(
         response => {
             console.log(response)
